@@ -40,7 +40,7 @@ def update_movie_session(
     movie_session.save()
 
 
-def get_taken_seats(movie_session_id: int) -> QuerySet:
+def get_taken_seats(movie_session_id: int) -> list[dict[str, int]]:
     tickets = Ticket.objects.filter(movie_session_id=movie_session_id)
     return [{"row": t.row, "seat": t.seat} for t in tickets]
 

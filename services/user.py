@@ -5,9 +5,9 @@ User = get_user_model()
 def create_user(
         username: str,
         password: str,
-        email: str = None,
-        first_name: str = None,
-        last_name: str = None
+        email: str | None = None,
+        first_name: str | None = None,
+        last_name: str | None = None
 ) -> User:
     user = User.objects.create_user(
         username=username,
@@ -19,7 +19,7 @@ def create_user(
         user.first_name = first_name
     if last_name:
         user.last_name = last_name
-    user.save()
+    user.save(update_fields=["email", "first_name", "last_name"])
     return user
 
 
