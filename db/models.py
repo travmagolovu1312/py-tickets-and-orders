@@ -70,7 +70,7 @@ class Order(models.Model):
         ordering = ["-created_at"]
 
     def __str__(self) -> str:
-        return f"<Order: {self.created_at}>"
+        return f"{self.created_at}"
 
 
 class Ticket(models.Model):
@@ -96,8 +96,9 @@ class Ticket(models.Model):
         ]
 
     def __str__(self) -> str:
-        return (f"<Ticket: {self.movie_session} "
-                f"(row: {self.row}, seat: {self.seat})>")
+        return (f"{self.movie_session.movie.title} "
+                f"{self.movie_session.show_time} "
+                f"(row: {self.row}, seat: {self.seat})")
 
     def clean(self) -> None:
         hall = self.movie_session.cinema_hall
@@ -116,4 +117,5 @@ class Ticket(models.Model):
 
 
 class User(AbstractUser):
-    pass
+    first_name = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
