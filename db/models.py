@@ -55,7 +55,7 @@ class MovieSession(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"{self.movie.title} {str(self.show_time)}"
+        return f"<MovieSession: {self.movie.title} {self.show_time}>"
 
 
 class Order(models.Model):
@@ -96,7 +96,8 @@ class Ticket(models.Model):
         ]
 
     def __str__(self) -> str:
-        return f"{self.movie_session} (row: {self.row}, seat: {self.seat})"
+        return (f"<Ticket: {self.movie_session} "
+                f"(row: {self.row}, seat: {self.seat})>")
 
     def clean(self) -> None:
         hall = self.movie_session.cinema_hall
